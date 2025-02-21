@@ -1,10 +1,9 @@
 #include <iostream>
 
+#include "Manager/Manager.h"
 #include "Parser/Parser.h"
 
 int main() {
-    Parser parser;
-    parser.parseGraph();
-
+    Manager manager = Manager();
     return 0;
 }

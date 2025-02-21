@@ -18,12 +18,13 @@ using namespace std;
 class Parser {
 private:
     unordered_map<std::string, Node*> nodes;
-    void readLocations(Graph<Node*> &graph, const string &fileName);
+    unordered_map<int, Node *> nodes_int;
+    void readLocations(Graph<Node *> &graph, const string &fileName);
     void readDistances(Graph<Node*> &graph, const string &fileName);
+
 public:
     Graph<Node*> parseGraph();
+    unordered_map<int, Node *> getNodesInt() const;
 };
-
-
 
 #endif //PARSER_H

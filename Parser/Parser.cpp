@@ -27,6 +27,7 @@ void Parser::readLocations(Graph<Node*> &graph, const string &fileName) {
 
             Node* node = new Node(id, location, code, parking);
             nodes[code] = node;
+            nodes_int[id] = node;
             graph.addVertex(node);
         }
     } catch (const ifstream::failure& e) {
@@ -78,10 +79,16 @@ void Parser::readDistances(Graph<Node*> &graph, const string &fileName) {
     iff.close();
 }
 
-Graph<Node *> Parser::parseGraph() {
+unordered_map<int, Node*> Parser::getNodesInt() const {
+    return this->nodes_int;
+}
+
+    Graph<Node *>
+    Parser::parseGraph()
+{
     Graph<Node *> graph;
-    readLocations(graph, "../Dataset/Locations.csv");
-    readDistances(graph, "../Dataset/Distances.csv");
+    readLocations(graph, "../Dataset/Small_Locations.csv");
+    readDistances(graph, "../Dataset/Small_Distances.csv");
 
     return graph;
 }

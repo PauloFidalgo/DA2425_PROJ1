@@ -15,8 +15,8 @@ class Node {
 
 public:
     Node(int id, std::string  location, std::string  code, bool parking);
+    int getId() const { return id; };
+    bool getParking() const { return parking; };
 };
-
-
 
 #endif //NODE_H
