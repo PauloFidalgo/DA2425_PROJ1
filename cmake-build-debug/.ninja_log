@@ -1,0 +1,7 @@
+# ninja log v6
+1081	1164	1740148833006628817	Project_1	4ffe71df9a9e9d96
+1	859	1740148831926634008	CMakeFiles/Project_1.dir/main.cpp.o	cb8acc4928a4bc43
+1	1131	1740148784913859991	CMakeFiles/Project_1.dir/parser/Parser.cpp.o	b22752fff4c53d78
+1	1081	1740148831927634003	CMakeFiles/Project_1.dir/Parser/Parser.cpp.o	3c4c5fd1660a4e28
+2	474	1740148784914859987	CMakeFiles/Project_1.dir/Model/Node.cpp.o	96cfaf29e8f393b5
+1	22	1740148918888216162	build.ninja	82db6d8568e8e918
