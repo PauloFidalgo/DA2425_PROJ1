@@ -45,23 +45,106 @@ void Manager::readBatch() const
             if (mode == "driving")
             {
                 string tmp;
+                int int_source = -1, int_destination = -1;
+                std::unordered_set<int> avoid_nodes;
+                std::vector<std::pair<int, int>> avoid_segments;
+                int include_node = -1;
 
                 if (getline(batchFile, line) && line.find("Source:") != std::string::npos)
                 {
                     extractPattern(line, tmp);
-                    int int_source = stoi(tmp);
+                    int_source = stoi(tmp);
+                }
 
-                    if (getline(batchFile, line) && line.find("Destination:") != std::string::npos)
+                if (getline(batchFile, line) && line.find("Destination:") != std::string::npos)
+                {
+                    extractPattern(line, tmp);
+                    int_destination = stoi(tmp);
+                }
+
+                if (getline(batchFile, line) && line.find("AvoidNodes:") != std::string::npos)
+                {
+                    extractPattern(line, tmp);
+                    if (!tmp.empty())
+                    {
+                        std::istringstream ss(tmp);
+                        std::string node;
+                        while (std::getline(ss, node, ','))
+                        {
+                            avoid_nodes.insert(stoi(node));
+                        }
+                    }
+                    if (getline(batchFile, line) && line.find("AvoidSegments:") != std::string::npos)
                     {
                         extractPattern(line, tmp);
-                        int int_destination = stoi(tmp);
 
-                        drive_only_independent_route(int_source, int_destination);
+                        if (!tmp.empty())
+                        {
+                            std::istringstream ss(tmp);
+                            std::string segment;
+                            while (std::getline(ss, segment, ')'))
+                            {
+                                if (!segment.empty() && segment[0] == ',')
+                                    segment = segment.substr(1); 
+                                segment.erase(std::remove(segment.begin(), segment.end(), '('), segment.end());
+                                segment.erase(std::remove(segment.begin(), segment.end(), ' '), segment.end()); // Remove any spaces
+                                if (!segment.empty())
+                                {
+                                    std::istringstream segment_ss(segment);
+                                    std::string node1, node2;
+                                    if (std::getline(segment_ss, node1, ',') && std::getline(segment_ss, node2, ','))
+                                    {
+                                        avoid_segments.emplace_back(stoi(node1), stoi(node2));
+                                    }
+                                }
+                            }
+                        }
                     }
+
+                    if (getline(batchFile, line) && line.find("IncludeNode:") != std::string::npos)
+                    {
+                        extractPattern(line, tmp);
+                        if (!tmp.empty())
+                        {
+                            include_node = stoi(tmp);
+                        }
+                    }
+                } 
+
+
+                if (avoid_nodes.empty() && avoid_segments.empty() && include_node == -1)
+                {
+                    drive_only_independent_route(int_source, int_destination);
+                }
+                else
+                {
+                    restricted_route(int_source, int_destination, avoid_nodes, avoid_segments, include_node);
                 }
             }
         }
     }
+    batchFile.close();
+}
+
+void Manager::writeBatch(const std::string &str) const
+{
+    std::ios_base::openmode mode = std::ios::out;
+    if (!first_time_writing)
+    {
+        mode |= std::ios::app;
+    }
+
+    std::fstream batchFile;
+    batchFile.open("../Batch/output.txt", mode);
+    if (!batchFile.is_open())
+    {
+        std::cout << "Error opening file for writing" << std::endl;
+        return;
+    }
+    batchFile << str;
+    batchFile.close();
+
+    first_time_writing = false;
 }
 
 std::pair<int, std::vector<int>> dijkstra(const Graph<Node *> &graph, Node *source, Node *destination, const std::unordered_map<int, Node *> &nodes, unordered_set<Node*> &visited)
@@ -150,59 +233,160 @@ void Manager::drive_only_independent_route(int source, int destination) const
     auto source_itr = nodes.find(source);
     auto destination_itr = nodes.find(destination);
 
-    std::cout << "Source:" << source << std::endl;
-    std::cout << "Destination:" << destination << std::endl;
+    std::string output = "Source:" + std::to_string(source) + "\n" +
+                         "Destination:" + std::to_string(destination) + "\n";
 
     if (source_itr == nodes.end() || destination_itr == nodes.end())
     {
-        std::cout << "BestDrivingRoute:none\n";
-        std::cout << "AlternativeDrivingRoute:none\n\n";
+        output += "BestDrivingRoute:none\n";
+        output += "AlternativeDrivingRoute:none\n\n";
+        writeBatch(output);
         return;
     }
 
-    std::unordered_set<Node*> visited;
+    std::unordered_set<Node *> visited;
 
-    std::pair<int,std::vector<int>> best_route = dijkstra(graph, source_itr->second, destination_itr->second, nodes, visited);
+    std::pair<int, std::vector<int>> best_route = dijkstra(graph, source_itr->second, destination_itr->second, nodes, visited);
     if (best_route.second.empty())
     {
-        std::cout << "BestDrivingRoute:none\n";
-        std::cout << "AlternativeDrivingRoute:none\n\n";
+        output += "BestDrivingRoute:none\n";
+        output += "AlternativeDrivingRoute:none\n\n";
+        writeBatch(output);
         return;
     }
 
-    std::cout << "BestDrivingRoute:";
+    output += "BestDrivingRoute:";
     for (size_t i = 0; i < best_route.second.size(); ++i)
     {
-        std::cout << best_route.second[i];
+        output += std::to_string(best_route.second[i]);
         if (i < best_route.second.size() - 1)
-            std::cout << ",";
+            output += ",";
     }
+    output += "(" + std::to_string(best_route.first) + ")\n";
 
-    std::cout << "(" << best_route.first << ")" << endl;
-
-    for (auto node : best_route.second) {
-        if (node != source && node != destination) {
+    for (auto node : best_route.second)
+    {
+        if (node != source && node != destination)
+        {
             auto v = nodes.find(node);
-            if (v != nodes.end()) {
+            if (v != nodes.end())
+            {
                 visited.insert(v->second);
             }
         }
     }
 
-    std::pair<int,std::vector<int>> alternative_route = dijkstra(graph, source_itr->second, destination_itr->second, nodes, visited);
+    std::pair<int, std::vector<int>> alternative_route = dijkstra(graph, source_itr->second, destination_itr->second, nodes, visited);
     if (alternative_route.second.empty())
     {
-        std::cout << "AlternativeDrivingRoute:none\n\n";
+        output += "AlternativeDrivingRoute:none\n\n";
+        writeBatch(output);
         return;
     }
 
-    std::cout << "AlternativeDrivingRoute:";
+    output += "AlternativeDrivingRoute:";
     for (size_t i = 0; i < alternative_route.second.size(); ++i)
     {
-        std::cout << alternative_route.second[i];
+        output += std::to_string(alternative_route.second[i]);
         if (i < alternative_route.second.size() - 1)
-            std::cout << ",";
+            output += ",";
+    }
+    output += "(" + std::to_string(alternative_route.first) + ")\n\n";
+
+    writeBatch(output);
+}
+
+void Manager::restricted_route(int source, int destination, const std::unordered_set<int>& avoid_nodes, const std::vector<std::pair<int, int>>& avoid_segments, int include_node) const
+{
+    auto source_itr = nodes.find(source);
+    auto destination_itr = nodes.find(destination);
+
+    std::string output = "Source:" + std::to_string(source) + "\n" +
+                         "Destination:" + std::to_string(destination) + "\n";
+
+    if (source_itr == nodes.end() || destination_itr == nodes.end())
+    {
+        output += "RestrictedDrivingRoute:none\n";
+        writeBatch(output);
+        return;
     }
 
-    std::cout << "(" << alternative_route.first << ")" << endl << endl;
+    std::unordered_set<Node*> visited;
+
+    // Modify the graph to exclude avoid_nodes and avoid_segments
+    Graph<Node*> modified_graph = graph;
+    for (int node_id : avoid_nodes)
+    {
+        auto node_itr = nodes.find(node_id);
+        if (node_itr != nodes.end())
+        {
+            modified_graph.removeVertex(node_itr->second);
+        }
+    }
+
+    for (const auto& segment : avoid_segments)
+    {
+        auto node1_itr = nodes.find(segment.first);
+        auto node2_itr = nodes.find(segment.second);
+        if (node1_itr != nodes.end() && node2_itr != nodes.end())
+        {
+            modified_graph.removeEdge(node1_itr->second, node2_itr->second);
+        }
+    }
+
+    // If include_node is specified, find the route via include_node
+    std::pair<int, std::vector<int>> route;
+    if (include_node != -1)
+    {
+        auto include_node_itr = nodes.find(include_node);
+        if (include_node_itr == nodes.end())
+        {
+            output += "RestrictedDrivingRoute:none\n";
+            writeBatch(output);
+            return;
+        }
+
+        auto first_leg = dijkstra(modified_graph, source_itr->second, include_node_itr->second, nodes, visited);
+        if (first_leg.second.empty())
+        {
+            output += "RestrictedDrivingRoute:none\n";
+            writeBatch(output);
+            return;
+        }
+
+        auto second_leg = dijkstra(modified_graph, include_node_itr->second, destination_itr->second, nodes, visited);
+        if (second_leg.second.empty())
+        {
+            output += "RestrictedDrivingRoute:none\n";
+            writeBatch(output);
+            return;
+        }
+
+        // Combine the two legs
+        route.first = first_leg.first + second_leg.first;
+        route.second = first_leg.second;
+        route.second.insert(route.second.end(), second_leg.second.begin() + 1, second_leg.second.end());
+    }
+    else
+    {
+        route = dijkstra(modified_graph, source_itr->second, destination_itr->second, nodes, visited);
+    }
+
+    if (route.second.empty())
+    {
+        output += "RestrictedDrivingRoute:none\n";
+        writeBatch(output);
+        return;
+    }
+
+    output += "RestrictedDrivingRoute:";
+    for (size_t i = 0; i < route.second.size(); ++i)
+    {
+        output += std::to_string(route.second[i]);
+        if (i < route.second.size() - 1)
+            output += ",";
+    }
+    output += "(" + std::to_string(route.first) + ")\n";
+
+    writeBatch(output);
 }

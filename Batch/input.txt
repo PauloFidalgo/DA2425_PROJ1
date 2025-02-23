@@ -3,5 +3,12 @@ Source:3
 Destination:8
 
 Mode:driving
-Source:8
-Destination:1
+Source:5
+Destination:4
+
+Mode:driving
+Source:5
+Destination:4
+AvoidNodes:2
+AvoidSegments:(4,7),(3,7)
+IncludeNode:

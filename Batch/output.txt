@@ -1,0 +1,13 @@
+Source:3
+Destination:8
+BestDrivingRoute:3,2,4,8(19)
+AlternativeDrivingRoute:3,7,8(34)
+
+Source:5
+Destination:4
+BestDrivingRoute:5,3,2,4(25)
+AlternativeDrivingRoute:none
+
+Source:5
+Destination:4
+RestrictedDrivingRoute:none
