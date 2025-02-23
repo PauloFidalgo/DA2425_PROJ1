@@ -1,0 +1,79 @@
+\hypertarget{classEdge}{}\doxysection{Edge$<$ T $>$ Class Template Reference}
+\label{classEdge}\index{Edge$<$ T $>$@{Edge$<$ T $>$}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEdge_a63b0fb4dc2b164df7707a7b9fe83ea34}\label{classEdge_a63b0fb4dc2b164df7707a7b9fe83ea34}} 
+{\bfseries Edge} (\mbox{\hyperlink{classVertex}{Vertex}}$<$ T $>$ $\ast$orig, \mbox{\hyperlink{classVertex}{Vertex}}$<$ T $>$ $\ast$dest, std\+::pair$<$ int, int $>$ w)
+\item 
+\mbox{\Hypertarget{classEdge_a9a2de066dff8513dd788d553fc1d0c81}\label{classEdge_a9a2de066dff8513dd788d553fc1d0c81}} 
+\mbox{\hyperlink{classVertex}{Vertex}}$<$ T $>$ $\ast$ {\bfseries get\+Dest} () const
+\item 
+\mbox{\Hypertarget{classEdge_ac1673a5bce6be4b1c29562142419ddb6}\label{classEdge_ac1673a5bce6be4b1c29562142419ddb6}} 
+std\+::pair$<$ int, int $>$ {\bfseries get\+Weight} () const
+\item 
+\mbox{\Hypertarget{classEdge_a2d36af60fa3dea16824bec12e5f68c58}\label{classEdge_a2d36af60fa3dea16824bec12e5f68c58}} 
+bool {\bfseries is\+Selected} () const
+\item 
+\mbox{\Hypertarget{classEdge_a40fc1470c5339203defca19b67c2535b}\label{classEdge_a40fc1470c5339203defca19b67c2535b}} 
+\mbox{\hyperlink{classVertex}{Vertex}}$<$ T $>$ $\ast$ {\bfseries get\+Orig} () const
+\item 
+\mbox{\Hypertarget{classEdge_af0a900f3006e47b9f363df7429298eeb}\label{classEdge_af0a900f3006e47b9f363df7429298eeb}} 
+\mbox{\hyperlink{classEdge}{Edge}}$<$ T $>$ $\ast$ {\bfseries get\+Reverse} () const
+\item 
+\mbox{\Hypertarget{classEdge_a75458cfc838ca5aee5c34cb9f03b5647}\label{classEdge_a75458cfc838ca5aee5c34cb9f03b5647}} 
+double {\bfseries get\+Flow} () const
+\item 
+\mbox{\Hypertarget{classEdge_a7b963c522a6b9788fb083e2ce0759881}\label{classEdge_a7b963c522a6b9788fb083e2ce0759881}} 
+double {\bfseries get\+Ratio} () const
+\item 
+\mbox{\Hypertarget{classEdge_a87c8402c5edd6729a2c934e2a0cce6fe}\label{classEdge_a87c8402c5edd6729a2c934e2a0cce6fe}} 
+void {\bfseries set\+Selected} (bool selected)
+\item 
+\mbox{\Hypertarget{classEdge_afe8f8429025756c63f38e8c6fde7382c}\label{classEdge_afe8f8429025756c63f38e8c6fde7382c}} 
+void {\bfseries set\+Reverse} (\mbox{\hyperlink{classEdge}{Edge}}$<$ T $>$ $\ast$reverse)
+\item 
+\mbox{\Hypertarget{classEdge_a1819116e2c156733a14bbd94cc27908e}\label{classEdge_a1819116e2c156733a14bbd94cc27908e}} 
+void {\bfseries set\+Flow} (double flow)
+\item 
+\mbox{\Hypertarget{classEdge_a60959bf9edac216745341130d847d807}\label{classEdge_a60959bf9edac216745341130d847d807}} 
+void {\bfseries set\+Weight} (std\+::pair$<$ int, int $>$ weight)
+\item 
+\mbox{\Hypertarget{classEdge_a8e264275131569b9b0d6a51d042755d0}\label{classEdge_a8e264275131569b9b0d6a51d042755d0}} 
+void {\bfseries set\+Ratio} (double ratio)
+\item 
+\mbox{\Hypertarget{classEdge_a8dbc3d9136fa015c2d8cfc30ca57a786}\label{classEdge_a8dbc3d9136fa015c2d8cfc30ca57a786}} 
+int {\bfseries get\+Walk} () const
+\item 
+\mbox{\Hypertarget{classEdge_a03bb8f86da05226def531113eeb5ecc8}\label{classEdge_a03bb8f86da05226def531113eeb5ecc8}} 
+int {\bfseries get\+Drive} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEdge_ae4d65678b91bd9d814af4720ad87cd0c}\label{classEdge_ae4d65678b91bd9d814af4720ad87cd0c}} 
+\mbox{\hyperlink{classVertex}{Vertex}}$<$ T $>$ $\ast$ {\bfseries dest}
+\item 
+\mbox{\Hypertarget{classEdge_ae6f3d34d23f4754732849ed63068e41c}\label{classEdge_ae6f3d34d23f4754732849ed63068e41c}} 
+std\+::pair$<$ int, int $>$ {\bfseries weight}
+\item 
+\mbox{\Hypertarget{classEdge_a5242549271b59544ad1189fb532b5bbe}\label{classEdge_a5242549271b59544ad1189fb532b5bbe}} 
+bool {\bfseries selected} = false
+\item 
+\mbox{\Hypertarget{classEdge_a4510c31e0479f9d25f6e35d086887192}\label{classEdge_a4510c31e0479f9d25f6e35d086887192}} 
+\mbox{\hyperlink{classVertex}{Vertex}}$<$ T $>$ $\ast$ {\bfseries orig}
+\item 
+\mbox{\Hypertarget{classEdge_a6c1e5191f85afbd20cf6198815c9b079}\label{classEdge_a6c1e5191f85afbd20cf6198815c9b079}} 
+\mbox{\hyperlink{classEdge}{Edge}}$<$ T $>$ $\ast$ {\bfseries reverse} = nullptr
+\item 
+\mbox{\Hypertarget{classEdge_a50ca213a37887544c0603b33844da7d5}\label{classEdge_a50ca213a37887544c0603b33844da7d5}} 
+double {\bfseries ratio} = 0
+\item 
+\mbox{\Hypertarget{classEdge_a30808601fa37f509147eabf9cc5f9ed6}\label{classEdge_a30808601fa37f509147eabf9cc5f9ed6}} 
+double {\bfseries flow}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Model/Graph.\+h\end{DoxyCompactItemize}

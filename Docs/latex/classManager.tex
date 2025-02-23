@@ -1,0 +1,117 @@
+\hypertarget{classManager}{}\doxysection{Manager Class Reference}
+\label{classManager}\index{Manager@{Manager}}
+
+
+Manages route planning functionalities for a graph-\/based navigation system.  
+
+
+
+
+{\ttfamily \#include $<$Manager.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classManager_aa1be26d18993db7bb9f30f3624979505}{Manager}} (std\+::string choice)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classManager}{Manager}} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classManager_a755e9d4b2257c0cb2d576bf166160d71}{drive\+\_\+only\+\_\+independent\+\_\+route}} (int source, int destination) const
+\begin{DoxyCompactList}\small\item\em Determines the best (fastest) route between a source and destination. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classManager_a7a0e3ec4b91e0bd190edf92b09d916af}{restricted\+\_\+route}} (int source, int destination, const std\+::unordered\+\_\+set$<$ int $>$ \&avoid\+\_\+nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$$>$ \&avoid\+\_\+segments, int include\+\_\+node) const
+\begin{DoxyCompactList}\small\item\em Finds a restricted driving route from a source node to a destination node, avoiding specified nodes and segments, and optionally including a specific node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classManager_aedfd16cf16aa0c74ceeb56882264c183}{drive\+\_\+and\+\_\+walk\+\_\+route}} (int source, int destination, int max\+\_\+walking\+\_\+time, const std\+::unordered\+\_\+set$<$ int $>$ \&avoid\+\_\+nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$$>$ \&avoid\+\_\+segments) const
+\begin{DoxyCompactList}\small\item\em Finds the best route from a source node to a destination node, considering both driving and walking. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages route planning functionalities for a graph-\/based navigation system. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classManager_aa1be26d18993db7bb9f30f3624979505}\label{classManager_aa1be26d18993db7bb9f30f3624979505}} 
+\index{Manager@{Manager}!Manager@{Manager}}
+\index{Manager@{Manager}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{Manager()}{Manager()}}
+{\footnotesize\ttfamily Manager\+::\+Manager (\begin{DoxyParamCaption}\item[{std\+::string}]{choice }\end{DoxyParamCaption})}
+
+
+
+Constructs a \mbox{\hyperlink{classManager}{Manager}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em choice} & The choice of input file. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classManager_aedfd16cf16aa0c74ceeb56882264c183}\label{classManager_aedfd16cf16aa0c74ceeb56882264c183}} 
+\index{Manager@{Manager}!drive\_and\_walk\_route@{drive\_and\_walk\_route}}
+\index{drive\_and\_walk\_route@{drive\_and\_walk\_route}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{drive\_and\_walk\_route()}{drive\_and\_walk\_route()}}
+{\footnotesize\ttfamily void Manager\+::drive\+\_\+and\+\_\+walk\+\_\+route (\begin{DoxyParamCaption}\item[{int}]{source,  }\item[{int}]{destination,  }\item[{int}]{max\+\_\+walking\+\_\+time,  }\item[{const std\+::unordered\+\_\+set$<$ int $>$ \&}]{avoid\+\_\+nodes,  }\item[{const std\+::vector$<$ std\+::pair$<$ int, int $>$$>$ \&}]{avoid\+\_\+segments }\end{DoxyParamCaption}) const}
+
+
+
+Finds the best route from a source node to a destination node, considering both driving and walking. 
+
+This function calculates the optimal route from a source node to a destination node by first driving to a parking node and then walking to the destination. It considers a maximum walking time and avoids specified nodes and segments.
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & The ID of the source node. \\
+\hline
+{\em destination} & The ID of the destination node. \\
+\hline
+{\em max\+\_\+walking\+\_\+time} & The maximum allowed walking time. \\
+\hline
+{\em avoid\+\_\+nodes} & A set of node IDs to avoid in the route. \\
+\hline
+{\em avoid\+\_\+segments} & A vector of node ID pairs representing segments to avoid in the route. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classManager_a755e9d4b2257c0cb2d576bf166160d71}\label{classManager_a755e9d4b2257c0cb2d576bf166160d71}} 
+\index{Manager@{Manager}!drive\_only\_independent\_route@{drive\_only\_independent\_route}}
+\index{drive\_only\_independent\_route@{drive\_only\_independent\_route}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{drive\_only\_independent\_route()}{drive\_only\_independent\_route()}}
+{\footnotesize\ttfamily void Manager\+::drive\+\_\+only\+\_\+independent\+\_\+route (\begin{DoxyParamCaption}\item[{int}]{source,  }\item[{int}]{destination }\end{DoxyParamCaption}) const}
+
+
+
+Determines the best (fastest) route between a source and destination. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & The source node ID. \\
+\hline
+{\em destination} & The destination node ID. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classManager_a7a0e3ec4b91e0bd190edf92b09d916af}\label{classManager_a7a0e3ec4b91e0bd190edf92b09d916af}} 
+\index{Manager@{Manager}!restricted\_route@{restricted\_route}}
+\index{restricted\_route@{restricted\_route}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{restricted\_route()}{restricted\_route()}}
+{\footnotesize\ttfamily void Manager\+::restricted\+\_\+route (\begin{DoxyParamCaption}\item[{int}]{source,  }\item[{int}]{destination,  }\item[{const std\+::unordered\+\_\+set$<$ int $>$ \&}]{avoid\+\_\+nodes,  }\item[{const std\+::vector$<$ std\+::pair$<$ int, int $>$$>$ \&}]{avoid\+\_\+segments,  }\item[{int}]{include\+\_\+node }\end{DoxyParamCaption}) const}
+
+
+
+Finds a restricted driving route from a source node to a destination node, avoiding specified nodes and segments, and optionally including a specific node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & The source node ID. \\
+\hline
+{\em destination} & The destination node ID. \\
+\hline
+{\em avoid\+\_\+nodes} & The set of nodes to avoid. \\
+\hline
+{\em avoid\+\_\+segments} & The list of segments to avoid. \\
+\hline
+{\em include\+\_\+node} & The node that must be included in the route. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Manager/Manager.\+h\item 
+Manager/Manager.\+cpp\end{DoxyCompactItemize}

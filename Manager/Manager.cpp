@@ -4,8 +4,10 @@
 
 #include "Manager.h"
 
-#include <unordered_set>
-
+/**
+ * @brief Constructs a Manager object.
+ * @param choice The choice of input file.
+ */
 Manager::Manager(std::string choice) {
     Parser parser = Parser(choice);
     this->graph = parser.parseGraph();
@@ -14,6 +16,11 @@ Manager::Manager(std::string choice) {
     readBatch();
 }
 
+/**
+ * @brief Extracts the pattern from a line.
+ * @param line The input line.
+ * @param mode The extracted mode.
+ */
 void extractPattern(const std::string &line, std::string &mode)
 {
     std::istringstream lineStream(line);
@@ -24,6 +31,9 @@ void extractPattern(const std::string &line, std::string &mode)
     }
 }
 
+/**
+ * @brief Reads the input file and processes each instruction.
+ */
 void Manager::readBatch() const
 {
     fstream batchFile;
@@ -190,6 +200,10 @@ void Manager::readBatch() const
     batchFile.close();
 }
 
+/**
+ * @brief Writes the output to a file.
+ * @param str The string to write to the file.
+ */
 void Manager::writeBatch(const std::string &str) const
 {
     std::ios_base::openmode mode = std::ios::out;
@@ -211,6 +225,19 @@ void Manager::writeBatch(const std::string &str) const
     first_time_writing = false;
 }
 
+/**
+ * @brief Implements Dijkstra's algorithm to find the shortest path between two nodes in the graph.
+ *
+ * @param graph The graph representing the navigation system.
+ * @param source The source node.
+ * @param destination The destination node.
+ * @param nodes The map of node IDs to Node objects.
+ * @param visited The set of nodes that have been visited.
+ * @param walking A flag indicating whether to use walking weights instead of driving weights.
+ * @return A pair containing the total distance and the path as a vector of node IDs.
+ *
+ * @complexity The complexity is O((V + E) log V), where V is the number of vertices and E is the number of edges.
+ */
 std::pair<int, std::vector<int>> dijkstra(const Graph<Node *> &graph, Node *source, Node *destination, const std::unordered_map<int, Node *> &nodes, unordered_set<Node*> &visited, bool walking = false)
 {
     auto source_vertex = graph.findVertex(source);
@@ -293,6 +320,11 @@ std::pair<int, std::vector<int>> dijkstra(const Graph<Node *> &graph, Node *sour
     return {dist[destination->getId()], path};
 }
 
+/**
+ * @brief Determines the best (fastest) route between a source and destination.
+ * @param source The source node ID.
+ * @param destination The destination node ID.
+ */
 void Manager::drive_only_independent_route(int source, int destination) const
 {
     auto source_itr = nodes.find(source);
@@ -361,7 +393,14 @@ void Manager::drive_only_independent_route(int source, int destination) const
     writeBatch(output);
 }
 
-
+/**
+ * @brief Finds a restricted driving route from a source node to a destination node, avoiding specified nodes and segments, and optionally including a specific node.
+ * @param source The source node ID.
+ * @param destination The destination node ID.
+ * @param avoid_nodes The set of nodes to avoid.
+ * @param avoid_segments The list of segments to avoid.
+ * @param include_node The node that must be included in the route.
+ */
 void Manager::restricted_route(int source, int destination, const std::unordered_set<int>& avoid_nodes, const std::vector<std::pair<int, int>>& avoid_segments, int include_node) const
 {
     auto source_itr = nodes.find(source);
@@ -455,6 +494,19 @@ void Manager::restricted_route(int source, int destination, const std::unordered
     writeBatch(output);
 }
 
+
+/**
+ * @brief Finds the best route from a source node to a destination node, considering both driving and walking.
+ * 
+ * This function calculates the optimal route from a source node to a destination node by first driving to a parking node
+ * and then walking to the destination. It considers a maximum walking time and avoids specified nodes and segments.
+ * 
+ * @param source The ID of the source node.
+ * @param destination The ID of the destination node.
+ * @param max_walking_time The maximum allowed walking time.
+ * @param avoid_nodes A set of node IDs to avoid in the route.
+ * @param avoid_segments A vector of node ID pairs representing segments to avoid in the route.
+ */
 void Manager::drive_and_walk_route(int source, int destination, int max_walking_time, const std::unordered_set<int>& avoid_nodes, const std::vector<std::pair<int, int>>& avoid_segments) const
 {
     auto source_itr = nodes.find(source);

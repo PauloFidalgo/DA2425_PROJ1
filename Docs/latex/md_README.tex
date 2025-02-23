@@ -1,0 +1,68 @@
+\hypertarget{md_README_autotoc_md1}{}\doxysection{Overview}\label{md_README_autotoc_md1}
+This project involves route planning functionalities for a graph-\/based navigation system. The main functionalities include\+:
+\begin{DoxyEnumerate}
+\item Independent Route Planning
+\item Restricted Route Planning
+\item Environmentally-\/\+Friendly Route Planning (driving and walking)
+\end{DoxyEnumerate}\hypertarget{md_README_autotoc_md2}{}\doxysection{Main Functions}\label{md_README_autotoc_md2}
+\hypertarget{md_README_autotoc_md3}{}\doxysubsection{1. $<$tt$>$\+Manager\+::drive\+\_\+only\+\_\+independent\+\_\+route$<$/tt$>$}\label{md_README_autotoc_md3}
+{\bfseries{Description}}\+: This function determines the best (fastest) route between a source and destination. It also identifies a best alternative independent route, ensuring the two routes share no intermediate nodes or segments, except for the source and destination.
+
+{\bfseries{Complexity}}\+: The complexity is O((V + E) log V) due to the use of Dijkstra\textquotesingle{}s algorithm for finding the shortest path.
+
+{\bfseries{How it works}}\+:
+\begin{DoxyItemize}
+\item Uses Dijkstra\textquotesingle{}s algorithm to find the shortest path from the source to the destination.
+\item Removes the nodes and edges used in the best route (except for the source and destination) and then uses Dijkstra\textquotesingle{}s algorithm again to find the next best route.
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md4}{}\doxysubsection{2. $<$tt$>$\+Manager\+::restricted\+\_\+route$<$/tt$>$}\label{md_README_autotoc_md4}
+{\bfseries{Description}}\+: This function computes the fastest route with specific routing restrictions, such as excluding specific nodes and segments from the graph, and including a specific node that the route must pass through.
+
+{\bfseries{Complexity}}\+: The complexity is O((V + E) log V) due to the use of Dijkstra\textquotesingle{}s algorithm for finding the shortest path.
+
+{\bfseries{How it works}}\+:
+\begin{DoxyItemize}
+\item Modifies the graph by removing the nodes and edges specified in the restrictions.
+\item If an include node is specified, finds the route via the include node by splitting the route into two legs.
+\item Uses Dijkstra\textquotesingle{}s algorithm to find the shortest path for each leg and combines the results.
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md5}{}\doxysubsection{3. $<$tt$>$\+Manager\+::drive\+\_\+and\+\_\+walk\+\_\+route$<$/tt$>$}\label{md_README_autotoc_md5}
+{\bfseries{Description}}\+: This function plans routes that combine driving and walking, allowing users to drive the first section of the route, park the vehicle, and then walk the remaining distance to the destination.
+
+{\bfseries{Complexity}}\+: The complexity is O((V + E) log V) due to the use of Dijkstra\textquotesingle{}s algorithm for finding the shortest path.
+
+{\bfseries{How it works}}\+:
+\begin{DoxyItemize}
+\item Finds all parking nodes in the graph.
+\item For each parking node, finds the driving route to the parking node and the walking route from the parking node to the destination.
+\item Combines the driving and walking routes and selects the best route that meets the user\textquotesingle{}s requirements.
+\item If no suitable route is found, provides up to 2 alternative routes that approximate the user\textquotesingle{}s requirements, sorted by overall travel time.
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md6}{}\doxysubsection{4. $<$tt$>$\+Manager\+::read\+Batch$<$/tt$>$}\label{md_README_autotoc_md6}
+{\bfseries{Description}}\+: This function reads the input file and processes each instruction to perform the appropriate route planning functionality.
+
+{\bfseries{Complexity}}\+: The complexity depends on the number of instructions and the complexity of the route planning functions called.
+
+{\bfseries{How it works}}\+:
+\begin{DoxyItemize}
+\item Reads each line from the input file.
+\item Extracts the mode and parameters for each instruction.
+\item Calls the appropriate route planning function based on the mode and parameters.
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md7}{}\doxysubsection{5. $<$tt$>$\+Manager\+::write\+Batch$<$/tt$>$}\label{md_README_autotoc_md7}
+{\bfseries{Description}}\+: This function writes the output to a file, either overwriting the file or appending to it based on a flag.
+
+{\bfseries{Complexity}}\+: The complexity is O(1) for each write operation.
+
+{\bfseries{How it works}}\+:
+\begin{DoxyItemize}
+\item Opens the output file in the appropriate mode (overwrite or append).
+\item Writes the output string to the file.
+\item Closes the file.
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md8}{}\doxysubsection{6. $<$tt$>$dijkstra$<$/tt$>$}\label{md_README_autotoc_md8}
+{\bfseries{Description}}\+: This function implements Dijkstra\textquotesingle{}s algorithm to find the shortest path between two nodes in the graph.
+
+{\bfseries{Complexity}}\+: The complexity is O((V + E) log V).
+
+{\bfseries{How it works}}\+:
+\begin{DoxyItemize}
+\item Initializes the distance to all nodes as infinity and the distance to the source node as 0.
+\item Uses a priority queue to select the node with the smallest distance.
+\item Updates the distances to the adjacent nodes and repeats the process until the destination node is reached or all nodes are processed. 
+\end{DoxyItemize}
