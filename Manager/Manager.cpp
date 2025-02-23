@@ -6,8 +6,8 @@
 
 #include <unordered_set>
 
-Manager::Manager() {
-    Parser parser = Parser();
+Manager::Manager(std::string choice) {
+    Parser parser = Parser(choice);
     this->graph = parser.parseGraph();
     this->nodes = parser.getNodesInt();
 

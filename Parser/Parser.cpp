@@ -4,6 +4,11 @@
 
 #include "Parser.h"
 
+Parser::Parser(const std::string &choice) {
+    if (choice == "1") {
+        this->prefix = "Small_";
+    }
+}
 
 void Parser::readLocations(Graph<Node*> &graph, const string &fileName) {
     fstream iff;
@@ -87,8 +92,8 @@ unordered_map<int, Node*> Parser::getNodesInt() const {
     Parser::parseGraph()
 {
     Graph<Node *> graph;
-    readLocations(graph, "../Dataset/Small_Locations.csv");
-    readDistances(graph, "../Dataset/Small_Distances.csv");
+    readLocations(graph, "../Dataset/" + prefix + "Locations.csv");
+    readDistances(graph, "../Dataset/" + prefix + "Distances.csv");
 
     return graph;
 }
