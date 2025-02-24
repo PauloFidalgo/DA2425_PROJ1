@@ -425,15 +425,23 @@ void Manager::restricted_route(int source, int destination, const std::unordered
         }
     }
 
-    // Modify the graph to exclude avoid_segments
-    Graph<Node*> modified_graph = graph;
-    for (const auto& segment : avoid_segments)
+    std::vector<pair<Edge<Node*>*, pair<int,int>>> original_weights;
+    for (const auto &segment : avoid_segments)
     {
         auto node1_itr = nodes.find(segment.first);
-        auto node2_itr = nodes.find(segment.second);
-        if (node1_itr != nodes.end() && node2_itr != nodes.end())
+        if (node1_itr != nodes.end())
         {
-            modified_graph.removeEdge(node1_itr->second, node2_itr->second);
+            auto source_vertex = graph.findVertex(node1_itr->second);
+            if (source_vertex) {
+                for (auto outgoing_edge : source_vertex->getAdj()) {
+                    if (outgoing_edge->getDest()->getInfo()->getId() == segment.second) {
+                        pair<int, int> original = outgoing_edge->getWeight();
+                        pair<Edge<Node *> *, pair<int, int>> edge_dist = {outgoing_edge, original};
+                        original_weights.push_back(edge_dist);
+                        outgoing_edge->setWeight({-1, -1});
+                    }
+                }
+            }
         }
     }
 
@@ -449,7 +457,7 @@ void Manager::restricted_route(int source, int destination, const std::unordered
             return;
         }
 
-        auto first_leg = dijkstra(modified_graph, source_itr->second, include_node_itr->second, nodes, visited);
+        auto first_leg = dijkstra(graph, source_itr->second, include_node_itr->second, nodes, visited);
         if (first_leg.second.empty())
         {
             output += "RestrictedDrivingRoute:none\n\n";
@@ -457,7 +465,7 @@ void Manager::restricted_route(int source, int destination, const std::unordered
             return;
         }
 
-        auto second_leg = dijkstra(modified_graph, include_node_itr->second, destination_itr->second, nodes, visited);
+        auto second_leg = dijkstra(graph, include_node_itr->second, destination_itr->second, nodes, visited);
         if (second_leg.second.empty())
         {
             output += "RestrictedDrivingRoute:none\n\n";
@@ -472,7 +480,7 @@ void Manager::restricted_route(int source, int destination, const std::unordered
     }
     else
     {
-        route = dijkstra(modified_graph, source_itr->second, destination_itr->second, nodes, visited);
+        route = dijkstra(graph, source_itr->second, destination_itr->second, nodes, visited);
     }
 
     if (route.second.empty())
@@ -492,6 +500,10 @@ void Manager::restricted_route(int source, int destination, const std::unordered
     output += "(" + std::to_string(route.first) + ")\n\n";
 
     writeBatch(output);
+
+    for (auto originals : original_weights) {
+        originals.first->setWeight(originals.second);
+    }
 }
 
 
@@ -526,15 +538,27 @@ void Manager::drive_and_walk_route(int source, int destination, int max_walking_
         return;
     }
 
-    // Modify the graph to exclude avoid_segments
-    Graph<Node*> modified_graph = graph;
-    for (const auto& segment : avoid_segments)
+    // Modify the graph to avoid segments
+    std::vector<pair<Edge<Node *> *, pair<int, int>>> original_weights;
+    for (const auto &segment : avoid_segments)
     {
         auto node1_itr = nodes.find(segment.first);
-        auto node2_itr = nodes.find(segment.second);
-        if (node1_itr != nodes.end() && node2_itr != nodes.end())
+        if (node1_itr != nodes.end())
         {
-            modified_graph.removeEdge(node1_itr->second, node2_itr->second);
+            auto source_vertex = graph.findVertex(node1_itr->second);
+            if (source_vertex)
+            {
+                for (auto outgoing_edge : source_vertex->getAdj())
+                {
+                    if (outgoing_edge->getDest()->getInfo()->getId() == segment.second)
+                    {
+                        pair<int, int> original = outgoing_edge->getWeight();
+                        pair<Edge<Node *> *, pair<int, int>> edge_dist = {outgoing_edge, original};
+                        original_weights.push_back(edge_dist);
+                        outgoing_edge->setWeight({-1, -1});
+                    }
+                }
+            }
         }
     }
 
@@ -572,14 +596,14 @@ void Manager::drive_and_walk_route(int source, int destination, int max_walking_
         }
 
         // Find the driving route to the parking node
-        auto driving_route = dijkstra(modified_graph, source_itr->second, parking_node, nodes, visited);
+        auto driving_route = dijkstra(graph, source_itr->second, parking_node, nodes, visited);
         if (driving_route.second.empty())
         {
             continue;
         }
 
         // Find the walking route from the parking node to the destination
-        auto walking_route = dijkstra(modified_graph, parking_node, destination_itr->second, nodes, visited, true);
+        auto walking_route = dijkstra(graph, parking_node, destination_itr->second, nodes, visited, true);
         if (walking_route.second.empty())
         {
             continue;
@@ -685,4 +709,9 @@ void Manager::drive_and_walk_route(int source, int destination, int max_walking_
     }
 
     writeBatch(output);
+
+    for (auto originals : original_weights)
+    {
+        originals.first->setWeight(originals.second);
+    }
 }

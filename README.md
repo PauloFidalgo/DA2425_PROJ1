@@ -11,24 +11,25 @@ This project involves route planning functionalities for a graph-based navigatio
 
 ### 1. `Manager::drive_only_independent_route`
 
-**Description**: This function determines the best (fastest) route between a source and destination. It also identifies a best alternative independent route, ensuring the two routes share no intermediate nodes or segments, except for the source and destination.
+**Description**: This function determines the best (fastest) route between a source and destination, considering only driving. It also identifies a best alternative independent route, ensuring the two routes share no intermediate nodes or segments, except for the source and destination.
 
 **Complexity**: The complexity is O((V + E) log V) due to the use of Dijkstra's algorithm for finding the shortest path.
 
 **How it works**:
 - Uses Dijkstra's algorithm to find the shortest path from the source to the destination.
-- Removes the nodes and edges used in the best route (except for the source and destination) and then uses Dijkstra's algorithm again to find the next best route.
+- In order to avoid intermediate nodes, first it marks them as visited, ensuring that they will not be considered in the Dijkstra's algorithm
 
 ### 2. `Manager::restricted_route`
 
-**Description**: This function computes the fastest route with specific routing restrictions, such as excluding specific nodes and segments from the graph, and including a specific node that the route must pass through.
+**Description**: This function computes the fastest route with specific routing restrictions, such as excluding specific nodes and segments from the graph, and including a specific node that the route must pass through. It considers driving mode only.
 
 **Complexity**: The complexity is O((V + E) log V) due to the use of Dijkstra's algorithm for finding the shortest path.
 
 **How it works**:
-- Modifies the graph by removing the nodes and edges specified in the restrictions.
-- If an include node is specified, finds the route via the include node by splitting the route into two legs.
-- Uses Dijkstra's algorithm to find the shortest path for each leg and combines the results.
+- In order to avoid nodes, it marks them as visited before running Dijkstra's
+- In order to avoid segments, it marks them with weight -1, as if they do not exist. The original weights are stored and in the end of the function, it restores them
+- In order to ensure that the path includes a node, it divides the problem in two. The first path is from the Source to that Node, and the second path starts on that Node and goes all the way to the Destination.
+- In all approaches, it uses the same Dijkstra algorithm as before
 
 ### 3. `Manager::drive_and_walk_route`
 

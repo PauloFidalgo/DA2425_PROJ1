@@ -30,3 +30,10 @@ Destination:5
 MaxWalkTime:18
 AvoidNodes:
 AvoidSegments:
+
+Mode:driving-walking
+Source:8
+Destination:5
+MaxWalkTime:18
+AvoidNodes:3,1,4
+AvoidSegments:

@@ -1,21 +1,21 @@
 Source:3
 Destination:8
-BestDrivingRoute:3,1064,1231,1234,806,236,16,216,13,1211,285,1221,1248,190,584,861,897,578,736,1096,461,95,556,516,487,8(67)
-AlternativeDrivingRoute:3,448,428,575,47,1230,1254,748,478,820,203,884,860,111,977,968,984,638,719,431,128,1219,1097,9,481,856,286,949,946,1227,8(159)
+BestDrivingRoute:3,2,4,8(19)
+AlternativeDrivingRoute:3,7,8(34)
 
 Source:5
 Destination:4
-BestDrivingRoute:5,951,1223,631,755,1043,771,761,1058,497,1103,813,32,832,46,938,4(48)
-AlternativeDrivingRoute:5,1255,1132,565,1108,623,627,664,519,680,279,272,239,566,564,1053,18,33,1225,754,831,4(74)
+BestDrivingRoute:5,3,2,4(25)
+AlternativeDrivingRoute:none
 
 Source:8
 Destination:3
-BestDrivingRoute:8,487,516,556,95,461,1096,736,395,897,861,584,190,1248,1221,285,1211,13,216,16,236,806,1234,1231,1064,3(67)
-AlternativeDrivingRoute:8,1227,946,949,286,856,481,9,1097,1219,128,431,719,638,984,968,977,111,860,884,203,820,478,748,1254,1230,47,575,428,448,3(159)
+BestDrivingRoute:8,4,2,3(19)
+AlternativeDrivingRoute:8,7,3(34)
 
 Source:5
 Destination:4
-RestrictedDrivingRoute:5,951,1223,631,755,1043,771,761,1058,497,1103,813,32,832,46,938,4(48)
+RestrictedDrivingRoute:none
 
 Source:8
 Destination:5
@@ -28,14 +28,21 @@ Message:No valid walking route found or walking time exceeds maximum limit
 Alternative routes:
 Source:8
 Destination:5
-DrivingRoute1:8,487,516,556,885,993,996,618,610,672,1197,280,61,1061,508,279,496,951(46)
-ParkingNode1:951
-WalkingRoute1:951,5(37)
-TotalTime1:83
-DrivingRoute2:8,1227,946,949,286,856,481,9,1097,1255(43)
-ParkingNode2:1255
-WalkingRoute2:1255,5(47)
-TotalTime2:90
+DrivingRoute1:8,4,2,3(19)
+ParkingNode1:3
+WalkingRoute1:3,5(10)
+TotalTime1:29
+DrivingRoute2:8,4,6(21)
+ParkingNode2:6
+WalkingRoute2:6,5(10)
+TotalTime2:31
+
+Source:8
+Destination:5
+DrivingRoute:8,4,2,3(19)
+ParkingNode:3
+WalkingRoute:3,5(10)
+TotalTime:29
 
 Source:8
 Destination:5
@@ -48,12 +55,8 @@ Message:No valid walking route found or walking time exceeds maximum limit
 Alternative routes:
 Source:8
 Destination:5
-DrivingRoute1:8,487,516,556,885,993,996,618,610,672,1197,280,61,1061,508,279,496,951(46)
-ParkingNode1:951
-WalkingRoute1:951,5(37)
-TotalTime1:83
-DrivingRoute2:8,1227,946,949,286,856,481,9,1097,1255(43)
-ParkingNode2:1255
-WalkingRoute2:1255,5(47)
-TotalTime2:90
+DrivingRoute1:8,7(14)
+ParkingNode1:7
+WalkingRoute1:7,6,5(22)
+TotalTime1:36
 
