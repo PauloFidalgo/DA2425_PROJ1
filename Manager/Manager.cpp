@@ -587,6 +587,9 @@ void Manager::drive_and_walk_route(int source, int destination, int max_walking_
     int best_total_time = std::numeric_limits<int>::max();
     std::vector<std::tuple<int, std::pair<int, std::vector<int>>, std::pair<int, std::vector<int>>>> alternative_routes;
 
+    bool no_valid_walking_route = false;
+    bool walking_time_exceeds_limit = false;
+
     // Try each parking node as the transition point from driving to walking
     for (Node *parking_node : parking_nodes)
     {
@@ -606,8 +609,10 @@ void Manager::drive_and_walk_route(int source, int destination, int max_walking_
         auto walking_route = dijkstra(graph, parking_node, destination_itr->second, nodes, visited, true);
         if (walking_route.second.empty())
         {
+            no_valid_walking_route = true;
             continue;
         }
+
 
         // Combine the driving and walking routes
         int total_time = driving_route.first + walking_route.first;
@@ -621,6 +626,7 @@ void Manager::drive_and_walk_route(int source, int destination, int max_walking_
         else if (walking_route.first > max_walking_time)
         {
             alternative_routes.emplace_back(total_time, driving_route, walking_route);
+            walking_time_exceeds_limit = true;
         }
     }
 
@@ -638,9 +644,13 @@ void Manager::drive_and_walk_route(int source, int destination, int max_walking_
         {
             output += "Message:No valid driving route found\n\n";
         }
-        else if (best_walking_route.second.empty())
+        else if (no_valid_walking_route)
         {
-            output += "Message:No valid walking route found or walking time exceeds maximum limit\n\n";
+            output += "Message:No valid walking route found\n";
+        }
+        else if (walking_time_exceeds_limit)
+        {
+            output += "Message:Walking time exceeds maximum limit\n";
         }
         else
         {
