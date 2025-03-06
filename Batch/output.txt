@@ -1,281 +1,51 @@
 Source:1
-Destination:100
-DrivingRoute:none
-ParkingNode:none
-WalkingRoute:none
-TotalTime:
-Message:Walking time exceeds maximum limit
-Alternative routes:
+Destination:2
+RestrictedDrivingRoute:1,2(10)
+
+Source:3
+Destination:4
+RestrictedDrivingRoute:3,7,8,4(40)
+
+Source:5
+Destination:6
+RestrictedDrivingRoute:5,3,2,4,6(40)
+
+Source:7
+Destination:8
+RestrictedDrivingRoute:7,8,4,6,4,8(56)
+
 Source:1
-Destination:100
-DrivingRoute1:1,531,833,400,132,415,785,1029,427,394,193,397,1226,852,1144,790,476(61)
-ParkingNode1:476
-WalkingRoute1:476,644,100(36)
-TotalTime1:97
-DrivingRoute2:1,485,57,105,441,446,453,1198(65)
-ParkingNode2:1198
-WalkingRoute2:1198,1200,476,644,100(81)
-TotalTime2:146
+Destination:8
+RestrictedDrivingRoute:none
 
-Source:200
-Destination:300
-DrivingRoute:none
-ParkingNode:none
-WalkingRoute:none
-TotalTime:
-Message:Walking time exceeds maximum limit
-Alternative routes:
-Source:200
-Destination:300
-DrivingRoute1:200,171,165,767,148,1214,1207,1123,189,409,604,602,599,481,856,286,949,946,1227,8,487,516,1011,972,980,984(75)
-ParkingNode1:984
-WalkingRoute1:984,1010,652,1006,442,1015,149,526,1027,333,962,973,328,325,373,114,1137,222,668,116,118,120,138,548,300(295)
-TotalTime1:370
-DrivingRoute2:200,171,165,767,148,1214,1207,865,1002,605,635,626,633,344,451,611,553,486,657(44)
-ParkingNode2:657
-WalkingRoute2:657,278,142,222,668,116,118,120,138,548,300(334)
-TotalTime2:378
+Source:1
+Destination:8
+RestrictedDrivingRoute:none
 
-Source:200
-Destination:300
-DrivingRoute:none
-ParkingNode:none
-WalkingRoute:none
-TotalTime:
-Message:No valid driving route found
+Source:1
+Destination:8
+RestrictedDrivingRoute:none
 
-Source:400
-Destination:500
-DrivingRoute:none
-ParkingNode:none
-WalkingRoute:none
-TotalTime:
-Message:Walking time exceeds maximum limit
-Alternative routes:
-Source:400
-Destination:500
-DrivingRoute1:400,833,531,186,384,378,669,663,451(37)
-ParkingNode1:451
-WalkingRoute1:451,500(240)
-TotalTime1:277
-DrivingRoute2:400,833,531,1219,1097,482,657(35)
-ParkingNode2:657
-WalkingRoute2:657,486,553,611,451,500(285)
-TotalTime2:320
+Source:1
+Destination:8
+RestrictedDrivingRoute:1,2,4,8(24)
 
-Source:600
-Destination:700
-DrivingRoute:none
-ParkingNode:none
-WalkingRoute:none
-TotalTime:
-Message:Walking time exceeds maximum limit
-Alternative routes:
-Source:600
-Destination:700
-DrivingRoute1:600,620,836,593,590,624,622(14)
-ParkingNode1:622
-WalkingRoute1:622,624,590,801,608,707,1196,202,700(91)
-TotalTime1:105
-DrivingRoute2:600,620,836,593,129,203(11)
-ParkingNode2:203
-WalkingRoute2:203,129,593,590,801,608,707,1196,202,700(100)
-TotalTime2:111
+Source:2
+Destination:5
+RestrictedDrivingRoute:none
 
-Source:800
-Destination:900
-DrivingRoute:none
-ParkingNode:none
-WalkingRoute:none
-TotalTime:
-Message:Walking time exceeds maximum limit
-Alternative routes:
-Source:800
-Destination:900
-DrivingRoute1:800,684,673,343,360,143,325,700,202,1196,707,608,805,590,593,129,203,859,567,455,190,665,404(127)
-ParkingNode1:404
-WalkingRoute1:404,900(20)
-TotalTime1:147
-DrivingRoute2:800,684,673,343,360,437,1157,987,1142(79)
-ParkingNode2:1142
-WalkingRoute2:1142,987,1157,437,1139,1024,1019,1022,974,1001,1017,1016,1025,960,1063,322,659,377,900(348)
-TotalTime2:427
+Source:4
+Destination:7
+RestrictedDrivingRoute:4,2,3,5,3,7(57)
 
-Source:1000
-Destination:1100
-DrivingRoute:none
-ParkingNode:none
-WalkingRoute:none
-TotalTime:
-Message:Walking time exceeds maximum limit
-Alternative routes:
-Source:1000
-Destination:1100
-DrivingRoute1:1000,459,511,514,371,688,1142(17)
-ParkingNode1:1142
-WalkingRoute1:1142,347,371,520,1206,106,472,601,738,873,866,515,1170,1100(175)
-TotalTime1:192
-DrivingRoute2:1000,459,444,478,748,1254,1230,47,575,428(21)
-ParkingNode2:428
-WalkingRoute2:428,955,1142,347,371,520,1206,106,472,601,738,873,866,515,1170,1100(215)
-TotalTime2:236
+Source:6
+Destination:1
+RestrictedDrivingRoute:none
 
-Source:1200
-Destination:1256
-DrivingRoute:none
-ParkingNode:none
-WalkingRoute:none
-TotalTime:
-Message:Walking time exceeds maximum limit
-Alternative routes:
-Source:1200
-Destination:1256
-DrivingRoute1:1200,476,996,450,671,991,594,18,43,41,121,37,943,832,46,40,329(99)
-ParkingNode1:329
-WalkingRoute1:329,555,19,1256(39)
-TotalTime1:138
-DrivingRoute2:1200,476,996,450,671,991,594,18,43,41,121,37,943,832(89)
-ParkingNode2:832
-WalkingRoute2:832,46,40,329,555,19,1256(92)
-TotalTime2:181
+Source:8
+Destination:3
+RestrictedDrivingRoute:none
 
-Source:50
-Destination:150
-DrivingRoute:none
-ParkingNode:none
-WalkingRoute:none
-TotalTime:
-Message:Walking time exceeds maximum limit
-Alternative routes:
-Source:50
-Destination:150
-DrivingRoute1:50,219,719,431,128,1219,1097,482,553,611,451(28)
-ParkingNode1:451
-WalkingRoute1:451,500,141,887,1105,1179,150(299)
-TotalTime1:327
-DrivingRoute2:50,219,719,431,128,1219,1097,482,657(23)
-ParkingNode2:657
-WalkingRoute2:657,486,553,611,451,500,141,887,1105,1179,150(344)
-TotalTime2:367
-
-Source:250
-Destination:350
-DrivingRoute:none
-ParkingNode:none
-WalkingRoute:none
-TotalTime:
-Message:Walking time exceeds maximum limit
-Alternative routes:
-Source:250
-Destination:350
-DrivingRoute1:250,923,1138,489,497,127,69,18,858,1059,211,574,1241,665,404(92)
-ParkingNode1:404
-WalkingRoute1:404,359,25,905,908,381,350(112)
-TotalTime1:204
-DrivingRoute2:250,923,1138,479,877,512,832,46,938,4,17,1240,1060,10,16,216,799,428,448,1142(51)
-ParkingNode2:1142
-WalkingRoute2:1142,987,1157,437,1139,1024,1019,1022,974,1001,1017,1016,1025,960,1063,322,659,665,404,359,25,905,908,381,350(469)
-TotalTime2:520
-
-Source:450
-Destination:550
-DrivingRoute:none
-ParkingNode:none
-WalkingRoute:none
-TotalTime:
-Message:Walking time exceeds maximum limit
-Alternative routes:
-Source:450
-Destination:550
-DrivingRoute1:450,993,885,556,516,1011,972,980,984(18)
-ParkingNode1:984
-WalkingRoute1:984,1010,652,1006,442,1015,149,526,1027,333,962,973,328,325,373,114,1137,142,358,463,550(225)
-TotalTime1:243
-DrivingRoute2:450,993,885,556,516,1011,972(14)
-ParkingNode2:972
-WalkingRoute2:972,1098,984,1010,652,1006,442,1015,149,526,1027,333,962,973,328,325,373,114,1137,142,358,463,550(248)
-TotalTime2:262
-
-Source:650
-Destination:750
-DrivingRoute:none
-ParkingNode:none
-WalkingRoute:none
-TotalTime:
-Message:Walking time exceeds maximum limit
-Alternative routes:
-Source:650
-Destination:750
-DrivingRoute1:650,701,696,549,654,438,1010,984,980,972,1011,516,556,885,993,450,671,991,594,1156,1130,768,489,1252,320,537,139,551,1146,1093,299,1095,1088,1081,258,1086(142)
-ParkingNode1:1086
-WalkingRoute1:1086,742,750(21)
-TotalTime1:163
-DrivingRoute2:650,701,696,549,654,438,1010,984,980,972,1011,516,556,885,993,450,671,991,594,1156,1130,768,489,1252,320,537,139,551,1146,1093,299,1095,1088(135)
-ParkingNode2:1088
-WalkingRoute2:1088,1081,258,1086,742,750(57)
-TotalTime2:192
-
-Source:850
-Destination:950
-DrivingRoute:none
-ParkingNode:none
-WalkingRoute:none
-TotalTime:
-Message:Walking time exceeds maximum limit
-Alternative routes:
-Source:850
-Destination:950
-DrivingRoute1:850,851,779,848,847,785,415,132,400,833,1255,1132,565,1108,623,627,664(64)
-ParkingNode1:664
-WalkingRoute1:664,950(11)
-TotalTime1:75
-DrivingRoute2:850,851,779,848,847,785,415,132,400,833,531,1219,1097,482,657(56)
-ParkingNode2:657
-WalkingRoute2:657,1108,623,627,664,950(66)
-TotalTime2:122
-
-Source:1050
-Destination:1150
-DrivingRoute:none
-ParkingNode:none
-WalkingRoute:none
-TotalTime:
-Message:Walking time exceeds maximum limit
-Alternative routes:
-Source:1050
-Destination:1150
-DrivingRoute1:1050,1012,1051,173,191,73,662,50,219,719,638,984(62)
-ParkingNode1:984
-WalkingRoute1:984,1010,652,1006,442,1015,149,526,1027,333,962,973,328,325,143,360,343,673,684,800,1233,1204,1213,355,1148,681,321,677,351,1150(316)
-TotalTime1:378
-DrivingRoute2:1050,1012,1051,173,191,485,1,1219,1255,5,951,496,279,272,239,566,564,557,522,671(70)
-ParkingNode2:671
-WalkingRoute2:671,563,935,560,321,677,351,1150(320)
-TotalTime2:390
-
-Source:1150
-Destination:1250
-DrivingRoute:none
-ParkingNode:none
-WalkingRoute:none
-TotalTime:
-Message:Walking time exceeds maximum limit
-Alternative routes:
-Source:1150
-Destination:1250
-DrivingRoute1:1150,351,677,321,1056,569,574,517,899,871,1060,10,16,216,799,428(80)
-ParkingNode1:428
-WalkingRoute1:428,420,1250(13)
-TotalTime1:93
-DrivingRoute2:1150,351,677,321,1056,569,574,517,899,871,1060,10,16,216(74)
-ParkingNode2:216
-WalkingRoute2:216,945,2,1250(36)
-TotalTime2:110
-
-Source:1150
-Destination:1250
-DrivingRoute:1150,351,677,321,1056,569,574,517,899,871,1060,10,16,216,799,428(80)
-ParkingNode:428
-WalkingRoute:428,420,1250(13)
-TotalTime:93
-
+Source:8
+Destination:8
+RestrictedDrivingRoute:none

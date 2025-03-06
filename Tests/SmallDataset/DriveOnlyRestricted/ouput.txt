@@ -14,13 +14,29 @@ Source:7
 Destination:8
 RestrictedDrivingRoute:7,8,4,6,4,8(56)
 
+Source:1
+Destination:8
+RestrictedDrivingRoute:none
+
+Source:1
+Destination:8
+RestrictedDrivingRoute:none
+
+Source:1
+Destination:8
+RestrictedDrivingRoute:none
+
+Source:1
+Destination:8
+RestrictedDrivingRoute:1,2,4,8(24)
+
 Source:2
 Destination:5
 RestrictedDrivingRoute:none
 
 Source:4
 Destination:7
-RestrictedDrivingRoute:4,8,7,3,5,3,7(84)
+RestrictedDrivingRoute:4,2,3,5,3,7(57)
 
 Source:6
 Destination:1
