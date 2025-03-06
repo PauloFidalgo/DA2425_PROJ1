@@ -1,0 +1,117 @@
+Source:1
+Destination:2
+DrivingRoute:1,2,3(15)
+ParkingNode:3
+WalkingRoute:3,2(8)
+TotalTime:23
+
+Source:3
+Destination:4
+DrivingRoute:none
+ParkingNode:none
+WalkingRoute:none
+TotalTime:
+Message:Walking time exceeds maximum limit
+Alternative routes:
+Source:3
+Destination:4
+DrivingRoute1:3,7(20)
+ParkingNode1:7
+WalkingRoute1:7,8,4(38)
+TotalTime1:58
+DrivingRoute2:3,7,8,4,6(55)
+ParkingNode2:6
+WalkingRoute2:6,4(30)
+TotalTime2:85
+
+Source:5
+Destination:6
+DrivingRoute:5,3(12)
+ParkingNode:3
+WalkingRoute:3,5,6(20)
+TotalTime:32
+
+Source:5
+Destination:6
+DrivingRoute:none
+ParkingNode:none
+WalkingRoute:none
+TotalTime:
+Message:Walking time exceeds maximum limit
+Alternative routes:
+Source:5
+Destination:6
+DrivingRoute1:5,3(12)
+ParkingNode1:3
+WalkingRoute1:3,5,6(20)
+TotalTime1:32
+DrivingRoute2:5,3,7(32)
+ParkingNode2:7
+WalkingRoute2:7,6(12)
+TotalTime2:44
+
+Source:7
+Destination:8
+DrivingRoute:none
+ParkingNode:none
+WalkingRoute:none
+TotalTime:
+Message:Walking time exceeds maximum limit
+Alternative routes:
+Source:7
+Destination:8
+DrivingRoute1:7,3(20)
+ParkingNode1:3
+WalkingRoute1:3,7,8(45)
+TotalTime1:65
+DrivingRoute2:7,8,4,6(35)
+ParkingNode2:6
+WalkingRoute2:6,7,8(32)
+TotalTime2:67
+
+Source:2
+Destination:5
+DrivingRoute:none
+ParkingNode:none
+WalkingRoute:none
+TotalTime:
+Message:No valid driving route found
+
+Source:4
+Destination:7
+DrivingRoute:4,6(15)
+ParkingNode:6
+WalkingRoute:6,7(12)
+TotalTime:27
+
+Source:6
+Destination:1
+DrivingRoute:none
+ParkingNode:none
+WalkingRoute:none
+TotalTime:
+Message:No valid driving route found
+
+Source:8
+Destination:3
+DrivingRoute:none
+ParkingNode:none
+WalkingRoute:none
+TotalTime:
+Message:No valid driving route found
+
+Source:8
+Destination:8
+DrivingRoute:8,7(14)
+ParkingNode:7
+WalkingRoute:7,8(20)
+TotalTime:34
+
+Source:1
+Destination:7
+DrivingRoute:none
+ParkingNode:none
+WalkingRoute:none
+TotalTime:
+Message:No valid driving route found
+
