@@ -44,8 +44,9 @@ public:
      * @brief Determines the best (fastest) route between a source and destination.
      * @param source The source node ID.
      * @param destination The destination node ID.
+     * @param restricted Boolean to know if the function is restricted or not
      */
-    void drive_only_independent_route(int source, int destination) const;
+    void drive_only_independent_route(int source, int destination, bool restricted = false) const;
 
     /**
      * @brief Finds a restricted driving route from a source node to a destination node, avoiding specified nodes and segments, and optionally including a specific node.

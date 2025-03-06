@@ -44,6 +44,8 @@ void Manager::readBatch() const
         return;
     }
 
+    bool restricted = false;
+
     string line;
     while (getline(batchFile, line))
     {
@@ -112,6 +114,7 @@ void Manager::readBatch() const
 
                     if (getline(batchFile, line) && line.find("IncludeNode:") != std::string::npos)
                     {
+                        restricted = true;
                         extractPattern(line, tmp);
                         if (!tmp.empty())
                         {
@@ -123,7 +126,8 @@ void Manager::readBatch() const
 
                 if (avoid_nodes.empty() && avoid_segments.empty() && include_node == -1)
                 {
-                    drive_only_independent_route(int_source, int_destination);
+                    drive_only_independent_route(int_source, int_destination, restricted);
+                    restricted = false;
                 }
                 else
                 {
@@ -324,8 +328,9 @@ std::pair<int, std::vector<int>> dijkstra(const Graph<Node *> &graph, Node *sour
  * @brief Determines the best (fastest) route between a source and destination.
  * @param source The source node ID.
  * @param destination The destination node ID.
+ * @param restricted Boolean to know if the function is restricted or not
  */
-void Manager::drive_only_independent_route(int source, int destination) const
+void Manager::drive_only_independent_route(int source, int destination, bool restricted) const
 {
     auto source_itr = nodes.find(source);
     auto destination_itr = nodes.find(destination);
@@ -333,10 +338,15 @@ void Manager::drive_only_independent_route(int source, int destination) const
     std::string output = "Source:" + std::to_string(source) + "\n" +
                          "Destination:" + std::to_string(destination) + "\n";
 
-    if (source_itr == nodes.end() || destination_itr == nodes.end())
+    if (source_itr == nodes.end() || destination_itr == nodes.end() || (source == destination))
     {
-        output += "BestDrivingRoute:none\n";
-        output += "AlternativeDrivingRoute:none\n\n";
+        if (!restricted) {
+            output += "BestDrivingRoute:none\n";
+            output += "AlternativeDrivingRoute:none\n\n";
+        } else {
+            output += "RestrictedDrivingRoute:none\n";
+        }
+
         writeBatch(output);
         return;
     }
@@ -346,13 +356,18 @@ void Manager::drive_only_independent_route(int source, int destination) const
     std::pair<int, std::vector<int>> best_route = dijkstra(graph, source_itr->second, destination_itr->second, nodes, visited);
     if (best_route.second.empty())
     {
-        output += "BestDrivingRoute:none\n";
-        output += "AlternativeDrivingRoute:none\n\n";
+        if (!restricted) {
+            output += "BestDrivingRoute:none\n";
+            output += "AlternativeDrivingRoute:none\n\n";
+        } else {
+            output += "RestrictedDrivingRoute:none\n";
+        }
+
         writeBatch(output);
         return;
     }
 
-    output += "BestDrivingRoute:";
+    output += restricted ? "RestrictedDrivingRoute:" : "BestDrivingRoute:";
     for (size_t i = 0; i < best_route.second.size(); ++i)
     {
         output += std::to_string(best_route.second[i]);
@@ -360,6 +375,7 @@ void Manager::drive_only_independent_route(int source, int destination) const
             output += ",";
     }
     output += "(" + std::to_string(best_route.first) + ")\n";
+    output += restricted ? "\n" : "";
 
     for (auto node : best_route.second)
     {
@@ -373,22 +389,24 @@ void Manager::drive_only_independent_route(int source, int destination) const
         }
     }
 
-    std::pair<int, std::vector<int>> alternative_route = dijkstra(graph, source_itr->second, destination_itr->second, nodes, visited);
-    if (alternative_route.second.empty())
-    {
-        output += "AlternativeDrivingRoute:none\n\n";
-        writeBatch(output);
-        return;
-    }
+    if (!restricted) {
+        std::pair<int, std::vector<int>> alternative_route = dijkstra(graph, source_itr->second, destination_itr->second, nodes, visited);
+        if (alternative_route.second.empty())
+        {
+            output += "AlternativeDrivingRoute:none\n\n";
+            writeBatch(output);
+            return;
+        }
 
-    output += "AlternativeDrivingRoute:";
-    for (size_t i = 0; i < alternative_route.second.size(); ++i)
-    {
-        output += std::to_string(alternative_route.second[i]);
-        if (i < alternative_route.second.size() - 1)
-            output += ",";
+        output += "AlternativeDrivingRoute:";
+        for (size_t i = 0; i < alternative_route.second.size(); ++i)
+        {
+            output += std::to_string(alternative_route.second[i]);
+            if (i < alternative_route.second.size() - 1)
+                output += ",";
+        }
+        output += "(" + std::to_string(alternative_route.first) + ")\n\n";
     }
-    output += "(" + std::to_string(alternative_route.first) + ")\n\n";
 
     writeBatch(output);
 }
