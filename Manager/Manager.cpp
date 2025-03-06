@@ -411,6 +411,12 @@ void Manager::drive_only_independent_route(int source, int destination, bool res
     writeBatch(output);
 }
 
+void reset_edge_weights(std::vector<pair<Edge<Node*>*, pair<int,int>>> &original_weights) {
+    for (auto originals : original_weights) {
+        originals.first->setWeight(originals.second);
+    }
+}
+
 /**
  * @brief Finds a restricted driving route from a source node to a destination node, avoiding specified nodes and segments, and optionally including a specific node.
  * @param source The source node ID.
@@ -444,15 +450,15 @@ void Manager::restricted_route(int source, int destination, const std::unordered
     }
 
     std::vector<pair<Edge<Node*>*, pair<int,int>>> original_weights;
-    for (const auto &segment : avoid_segments)
+    for (const auto &[fst, snd] : avoid_segments)
     {
-        auto node1_itr = nodes.find(segment.first);
+        auto node1_itr = nodes.find(fst);
         if (node1_itr != nodes.end())
         {
             auto source_vertex = graph.findVertex(node1_itr->second);
             if (source_vertex) {
                 for (auto outgoing_edge : source_vertex->getAdj()) {
-                    if (outgoing_edge->getDest()->getInfo()->getId() == segment.second) {
+                    if (outgoing_edge->getDest()->getInfo()->getId() == snd) {
                         pair<int, int> original = outgoing_edge->getWeight();
                         pair<Edge<Node *> *, pair<int, int>> edge_dist = {outgoing_edge, original};
                         original_weights.push_back(edge_dist);
@@ -472,6 +478,7 @@ void Manager::restricted_route(int source, int destination, const std::unordered
         {
             output += "RestrictedDrivingRoute:none\n\n";
             writeBatch(output);
+            reset_edge_weights(original_weights);
             return;
         }
 
@@ -480,6 +487,7 @@ void Manager::restricted_route(int source, int destination, const std::unordered
         {
             output += "RestrictedDrivingRoute:none\n\n";
             writeBatch(output);
+            reset_edge_weights(original_weights);
             return;
         }
 
@@ -488,6 +496,7 @@ void Manager::restricted_route(int source, int destination, const std::unordered
         {
             output += "RestrictedDrivingRoute:none\n\n";
             writeBatch(output);
+            reset_edge_weights(original_weights);
             return;
         }
 
@@ -505,6 +514,7 @@ void Manager::restricted_route(int source, int destination, const std::unordered
     {
         output += "RestrictedDrivingRoute:none\n\n";
         writeBatch(output);
+        reset_edge_weights(original_weights);
         return;
     }
 
@@ -519,9 +529,7 @@ void Manager::restricted_route(int source, int destination, const std::unordered
 
     writeBatch(output);
 
-    for (auto originals : original_weights) {
-        originals.first->setWeight(originals.second);
-    }
+    reset_edge_weights(original_weights);
 }
 
 
@@ -738,8 +746,5 @@ void Manager::drive_and_walk_route(int source, int destination, int max_walking_
 
     writeBatch(output);
 
-    for (auto originals : original_weights)
-    {
-        originals.first->setWeight(originals.second);
-    }
+    reset_edge_weights(original_weights);
 }
