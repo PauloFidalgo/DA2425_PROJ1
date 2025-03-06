@@ -75,3 +75,55 @@ This project involves route planning functionalities for a graph-based navigatio
 - Initializes the distance to all nodes as infinity and the distance to the source node as 0.
 - Uses a priority queue to select the node with the smallest distance.
 - Updates the distances to the adjacent nodes and repeats the process until the destination node is reached or all nodes are processed.
+
+## Tests
+
+The pairs of input.txt and output.txt files are presented for both Small Dataset and Large Dataset in the /Tests directory. Inside /Tests, there are two directories specifying the dataset to use, each containing three subdirectories:
+- DriveOnlyNoRestriction
+- DriveOnlyRestricted
+- DriveWalk
+
+### DriveOnlyNoRestriction Directory
+Contains input.txt with directives for the shortest path, driving without restrictions. Syntax:
+
+```sh
+Mode:driving
+Source:<id>
+Destination:<id>
+```
+
+Output syntax:
+
+```sh
+Source:<id>
+Destination:<id>
+BestDrivingRoute:<id>,<id>,...(<total_time>)
+AlternativeDrivingRoute:<id>,<id>,...(<total_time>)
+```
+
+This test verifies that Dijkstra returns the shortest path for a given source and destination. Since the graph is undirected, the shortest path from A to B should be the same as from B to A, so some tests are included to verify this. It also includes a test where if the source node is the same as the destination node, both BestDrivingRoute and AlternativeDrivingRoute are none.
+
+### DriveOnlyRestricted Directory
+Contains input.txt with directives for the shortest path, driving with restrictions. Syntax:
+
+```sh
+Mode:driving
+Source:<id>
+Destination:<id>
+AvoidNodes:<id>,<id>,...
+AvoidSegments:(<id>,<id>),...
+IncludeNode:<id>
+```
+
+Output syntax:
+
+```sh
+Source:<id>
+Destination:<id>
+RestrictedDrivingRoute:<id>,<id>,...(<total_time>)
+```
+
+This testbench verifies that:
+1. If no restrictions are presented, the result is the same as running the `DriveOnlyNoRestriction` algorithm.
+2. If we remove all the edges that connect the Source Node to its neighbors, there is no valid path. The same applies if we remove all edges connecting the Destination Node to its neighbors.
+3. If we avoid all the adjacent nodes of the source or destination node, there is no valid path.
