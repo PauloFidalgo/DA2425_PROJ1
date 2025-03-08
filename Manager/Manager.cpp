@@ -630,7 +630,7 @@ void Manager::drive_and_walk_route(int source, int destination, int max_walking_
         {
             continue;
         }
-        
+
         // Find the walking route from the parking node to the destination
         auto walking_route = dijkstra(graph, parking_node, destination_itr->second, nodes, visited, true);
         if (walking_route.second.empty())

@@ -28,11 +28,6 @@ Destination:7
 BestDrivingRoute:4,8,7(20)
 AlternativeDrivingRoute:4,7(30)
 
-Source:1
-Destination:6
-BestDrivingRoute:1,2,4,6(33)
-AlternativeDrivingRoute:none
-
 Source:6
 Destination:1
 BestDrivingRoute:6,4,2,1(33)

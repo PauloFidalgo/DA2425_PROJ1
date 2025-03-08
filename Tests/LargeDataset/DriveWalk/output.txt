@@ -279,3 +279,96 @@ ParkingNode:428
 WalkingRoute:428,420,1250(13)
 TotalTime:93
 
+Source:371
+Destination:634
+DrivingRoute:none
+ParkingNode:none
+WalkingRoute:none
+TotalTime:
+Message:Walking time exceeds maximum limit
+Alternative routes:
+Source:371
+Destination:634
+DrivingRoute1:371,347,1142(4)
+ParkingNode1:1142
+WalkingRoute1:1142,347,371,520,1206,106,674,634(105)
+TotalTime1:109
+
+Source:520
+Destination:634
+DrivingRoute:none
+ParkingNode:none
+WalkingRoute:none
+TotalTime:
+Message:Walking time exceeds maximum limit
+Alternative routes:
+Source:520
+Destination:634
+DrivingRoute1:520,1206,106,674,636,1022,1019,1024,1139,437,1157,987,1142(33)
+ParkingNode1:1142
+WalkingRoute1:1142,987,1157,437,1139,1024,1019,1022,636,674,634(133)
+TotalTime1:166
+DrivingRoute2:520,1206,106,674,636,1022,1019,1024,1139,437,1157,987,1142,448,428(40)
+ParkingNode2:428
+WalkingRoute2:428,955,1142,987,1157,437,1139,1024,1019,1022,636,674,634(173)
+TotalTime2:213
+
+Source:1206
+Destination:688
+DrivingRoute:1206,520,371,688,1142(11)
+ParkingNode:1142
+WalkingRoute:1142,688(12)
+TotalTime:23
+
+Source:688
+Destination:521
+DrivingRoute:none
+ParkingNode:none
+WalkingRoute:none
+TotalTime:
+Message:Walking time exceeds maximum limit
+Alternative routes:
+Source:688
+Destination:521
+DrivingRoute1:688,1142(2)
+ParkingNode1:1142
+WalkingRoute1:1142,347,371,520,1206,521(64)
+TotalTime1:66
+
+Source:688
+Destination:521
+DrivingRoute:none
+ParkingNode:none
+WalkingRoute:none
+TotalTime:
+Message:Walking time exceeds maximum limit
+Alternative routes:
+Source:688
+Destination:521
+DrivingRoute1:688,1142(2)
+ParkingNode1:1142
+WalkingRoute1:1142,347,371,520,1206,521(64)
+TotalTime1:66
+
+Source:688
+Destination:1206
+DrivingRoute:688,1142(2)
+ParkingNode:1142
+WalkingRoute:1142,347,371,520,1206(58)
+TotalTime:60
+
+Source:688
+Destination:1206
+DrivingRoute:none
+ParkingNode:none
+WalkingRoute:none
+TotalTime:
+Message:Walking time exceeds maximum limit
+Alternative routes:
+Source:688
+Destination:1206
+DrivingRoute1:688,1142(2)
+ParkingNode1:1142
+WalkingRoute1:1142,347,371,520,1206(58)
+TotalTime1:60
+
