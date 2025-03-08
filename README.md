@@ -83,6 +83,18 @@ The pairs of input.txt and output.txt files are presented for both Small Dataset
 - DriveOnlyRestricted
 - DriveWalk
 
+To ensure the correctness and robustness of the implemented functions, various tests were conducted. The tests included random combinations of source and destination nodes, as well as specific scenarios to isolate parts of the graph and test edge cases.
+
+### Random Tests
+
+Random tests were conducted by selecting random source and destination nodes and running the functions with different parameters. These tests helped verify the general functionality of the algorithms.
+
+### Isolated Graph Tests
+
+To test specific cases, a part of the graph was isolated by avoiding the adjacent nodes. The isolated nodes were: 1206, 520, 371, 688, 1142, 514, 347, 340, 106, 2134, 601, 636, 674, 634, 521, 196, 749. The adjacent nodes avoided were: 632, 1022, 738, 334, 152, 511, 331, 264, 955, 448, 987, 264.
+
+The only parking node in this isolated graph was node 1142 (SC8866).
+
 ### DriveOnlyNoRestriction Directory
 Contains input.txt with directives for the shortest path, driving without restrictions. Syntax:
 
@@ -127,3 +139,71 @@ This testbench verifies that:
 1. If no restrictions are presented, the result is the same as running the `DriveOnlyNoRestriction` algorithm.
 2. If we remove all the edges that connect the Source Node to its neighbors, there is no valid path. The same applies if we remove all edges connecting the Destination Node to its neighbors.
 3. If we avoid all the adjacent nodes of the source or destination node, there is no valid path.
+
+
+### DriveWalk Directory
+
+Contains input.txt with directives for the shortest path, combining walking and driving. Syntax:
+
+```sh
+Mode:driving-walking
+Source:<id>
+Destination:<id>
+MaxWalkTime:<int>
+AvoidNodes:<id>,<id>,...
+AvoidSegments:(<id>,<id>),...
+```
+
+Output syntax for a valid case:
+
+```sh
+Source:<id>
+Destination:<id>
+DrivingRoute:<id>,<id>,...(<drive_time>)
+ParkingNode:<id>
+WalkingRoute:<id>,<id>,...(<walk_time>)
+TotalTime:<time>
+```
+
+Output syntax for a invalid case (not because of MaxWalkTime):
+
+```sh
+Source:<id>
+Destination:<id>
+DrivingRoute:none
+ParkingNode:none
+WalkingRoute:none
+TotalTime:
+Message:<message>
+```
+
+Output syntax for a invalid case (MaxWalkTime exceeded):
+
+```sh
+Source:<id>
+Destination:<id>
+DrivingRoute:none
+ParkingNode:none
+WalkingRoute:none
+TotalTime:
+Message:Walking time exceeds maximum limit
+Alternative routes:
+Source:<id>
+Destination:<id>
+DrivingRoute1:<id>,<id>,...(<drive_time_1>)
+ParkingNode1:<id>
+WalkingRoute1:<id>,<id>,...(<walk_time_1>)
+TotalTime1:<total_time_1>
+DrivingRoute2:<id>,<id>,...(<drive_time_2>)
+ParkingNode2:<id>
+WalkingRoute2:<id>,<id>,...(<walk_time_2>)
+TotalTime2:<total_time_2>
+```
+
+This testbench verifies that:
+1. The function correctly combines driving and walking routes to find the optimal path.
+2. The function respects the maximum walking time constraint.
+3. The function correctly handles cases where walking time exceeds the maximum limit.
+4. The function provides alternative routes when the optimal route is not feasible.
+
+
