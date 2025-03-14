@@ -1,0 +1,33 @@
+Source:1
+Destination:11
+DrivingRoute:1,2,5(5)
+ParkingNode:5
+WalkingRoute:5,8,11(23)
+TotalTime:28
+
+Source:1
+Destination:11
+DrivingRoute:1,2,6(6)
+ParkingNode:6
+WalkingRoute:6,8,11(21)
+TotalTime:27
+
+Source:1
+Destination:11
+DrivingRoute:none
+ParkingNode:none
+WalkingRoute:none
+TotalTime:
+Message:Walking time exceeds maximum limit
+Alternative routes:
+Source:1
+Destination:11
+DrivingRoute1:1,2,5(5)
+ParkingNode1:5
+WalkingRoute1:5,8,11(23)
+TotalTime1:28
+DrivingRoute2:1,2,4(6)
+ParkingNode2:4
+WalkingRoute2:4,8,11(22)
+TotalTime2:28
+

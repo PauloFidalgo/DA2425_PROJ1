@@ -14,7 +14,7 @@ Manages route planning functionalities for a graph-\/based navigation system.
 \item 
 \mbox{\hyperlink{classManager_aa1be26d18993db7bb9f30f3624979505}{Manager}} (std\+::string choice)
 \begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classManager}{Manager}} object. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classManager_a755e9d4b2257c0cb2d576bf166160d71}{drive\+\_\+only\+\_\+independent\+\_\+route}} (int source, int destination) const
+void \mbox{\hyperlink{classManager_a6a2f571e5830901e1d354553b52740f5}{drive\+\_\+only\+\_\+independent\+\_\+route}} (int source, int destination, bool restricted=false) const
 \begin{DoxyCompactList}\small\item\em Determines the best (fastest) route between a source and destination. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classManager_a7a0e3ec4b91e0bd190edf92b09d916af}{restricted\+\_\+route}} (int source, int destination, const std\+::unordered\+\_\+set$<$ int $>$ \&avoid\+\_\+nodes, const std\+::vector$<$ std\+::pair$<$ int, int $>$$>$ \&avoid\+\_\+segments, int include\+\_\+node) const
 \begin{DoxyCompactList}\small\item\em Finds a restricted driving route from a source node to a destination node, avoiding specified nodes and segments, and optionally including a specific node. \end{DoxyCompactList}\item 
@@ -69,11 +69,11 @@ This function calculates the optimal route from a source node to a destination n
 {\em avoid\+\_\+segments} & A vector of node ID pairs representing segments to avoid in the route. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classManager_a755e9d4b2257c0cb2d576bf166160d71}\label{classManager_a755e9d4b2257c0cb2d576bf166160d71}} 
+\mbox{\Hypertarget{classManager_a6a2f571e5830901e1d354553b52740f5}\label{classManager_a6a2f571e5830901e1d354553b52740f5}} 
 \index{Manager@{Manager}!drive\_only\_independent\_route@{drive\_only\_independent\_route}}
 \index{drive\_only\_independent\_route@{drive\_only\_independent\_route}!Manager@{Manager}}
 \doxysubsubsection{\texorpdfstring{drive\_only\_independent\_route()}{drive\_only\_independent\_route()}}
-{\footnotesize\ttfamily void Manager\+::drive\+\_\+only\+\_\+independent\+\_\+route (\begin{DoxyParamCaption}\item[{int}]{source,  }\item[{int}]{destination }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily void Manager\+::drive\+\_\+only\+\_\+independent\+\_\+route (\begin{DoxyParamCaption}\item[{int}]{source,  }\item[{int}]{destination,  }\item[{bool}]{restricted = {\ttfamily false} }\end{DoxyParamCaption}) const}
 
 
 
@@ -84,6 +84,8 @@ Determines the best (fastest) route between a source and destination.
 {\em source} & The source node ID. \\
 \hline
 {\em destination} & The destination node ID. \\
+\hline
+{\em restricted} & Boolean to know if the function is restricted or not \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classManager_a7a0e3ec4b91e0bd190edf92b09d916af}\label{classManager_a7a0e3ec4b91e0bd190edf92b09d916af}} 

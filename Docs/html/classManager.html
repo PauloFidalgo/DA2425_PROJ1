@@ -79,9 +79,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa1be26d18993db7bb9f30f3624979505"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#aa1be26d18993db7bb9f30f3624979505">Manager</a> (std::string choice)</td></tr>
 <tr class="memdesc:aa1be26d18993db7bb9f30f3624979505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classManager.html" title="Manages route planning functionalities for a graph-based navigation system.">Manager</a> object.  <a href="classManager.html#aa1be26d18993db7bb9f30f3624979505">More...</a><br /></td></tr>
 <tr class="separator:aa1be26d18993db7bb9f30f3624979505"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a755e9d4b2257c0cb2d576bf166160d71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#a755e9d4b2257c0cb2d576bf166160d71">drive_only_independent_route</a> (int source, int destination) const</td></tr>
-<tr class="memdesc:a755e9d4b2257c0cb2d576bf166160d71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the best (fastest) route between a source and destination.  <a href="classManager.html#a755e9d4b2257c0cb2d576bf166160d71">More...</a><br /></td></tr>
-<tr class="separator:a755e9d4b2257c0cb2d576bf166160d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a2f571e5830901e1d354553b52740f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#a6a2f571e5830901e1d354553b52740f5">drive_only_independent_route</a> (int source, int destination, bool restricted=false) const</td></tr>
+<tr class="memdesc:a6a2f571e5830901e1d354553b52740f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the best (fastest) route between a source and destination.  <a href="classManager.html#a6a2f571e5830901e1d354553b52740f5">More...</a><br /></td></tr>
+<tr class="separator:a6a2f571e5830901e1d354553b52740f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a0e3ec4b91e0bd190edf92b09d916af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classManager.html#a7a0e3ec4b91e0bd190edf92b09d916af">restricted_route</a> (int source, int destination, const std::unordered_set&lt; int &gt; &amp;avoid_nodes, const std::vector&lt; std::pair&lt; int, int &gt;&gt; &amp;avoid_segments, int include_node) const</td></tr>
 <tr class="memdesc:a7a0e3ec4b91e0bd190edf92b09d916af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds a restricted driving route from a source node to a destination node, avoiding specified nodes and segments, and optionally including a specific node.  <a href="classManager.html#a7a0e3ec4b91e0bd190edf92b09d916af">More...</a><br /></td></tr>
 <tr class="separator:a7a0e3ec4b91e0bd190edf92b09d916af"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,8 +178,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a755e9d4b2257c0cb2d576bf166160d71"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a755e9d4b2257c0cb2d576bf166160d71">&#9670;&nbsp;</a></span>drive_only_independent_route()</h2>
+<a id="a6a2f571e5830901e1d354553b52740f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a2f571e5830901e1d354553b52740f5">&#9670;&nbsp;</a></span>drive_only_independent_route()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -194,7 +194,13 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>destination</em>&#160;</td>
+          <td class="paramname"><em>destination</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>restricted</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -209,6 +215,7 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">source</td><td>The source node ID. </td></tr>
     <tr><td class="paramname">destination</td><td>The destination node ID. </td></tr>
+    <tr><td class="paramname">restricted</td><td>Boolean to know if the function is restricted or not </td></tr>
   </table>
   </dd>
 </dl>

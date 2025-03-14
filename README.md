@@ -82,6 +82,9 @@ The pairs of input.txt and output.txt files are presented for both Small Dataset
 - DriveOnlyNoRestriction
 - DriveOnlyRestricted
 - DriveWalk
+- DriveWalkApproximate
+
+In addition, to ensure that the function combining driving and walking is environmentally friendly—meaning that, in case of a tie in total time, it prioritizes the path with the longest walking component—I have created an auxiliary graph. This graph is located in the `Dataset/` folder. The tests verifying this functionality are in `Tests/AppendixDataset/` and focus exclusively on the drive-and-walk function.
 
 To ensure the correctness and robustness of the implemented functions, various tests were conducted. The tests included random combinations of source and destination nodes, as well as specific scenarios to isolate parts of the graph and test edge cases.
 
@@ -165,7 +168,7 @@ WalkingRoute:<id>,<id>,...(<walk_time>)
 TotalTime:<time>
 ```
 
-Output syntax for a invalid case (not because of MaxWalkTime):
+Output syntax for an invalid case (not because of MaxWalkTime):
 
 ```sh
 Source:<id>
@@ -177,7 +180,19 @@ TotalTime:
 Message:<message>
 ```
 
-Output syntax for a invalid case (MaxWalkTime exceeded):
+### DriveWalkApproximate Directory
+
+Contains input.txt with directives for the alternative routes, combining walking and driving. Syntax:
+
+```sh
+Mode:driving-walking
+Source:<id>
+Destination:<id>
+MaxWalkTime:<int>
+AvoidNodes:<id>,<id>,...
+AvoidSegments:(<id>,<id>),...
+```
+Output syntax:
 
 ```sh
 Source:<id>

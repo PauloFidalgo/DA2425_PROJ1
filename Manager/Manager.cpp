@@ -642,14 +642,18 @@ void Manager::drive_and_walk_route(int source, int destination, int max_walking_
 
         // Combine the driving and walking routes
         int total_time = driving_route.first + walking_route.first;
-        if (total_time < best_total_time && walking_route.first <= max_walking_time)
-        {
-            best_total_time = total_time;
-            best_driving_route = driving_route;
-            best_walking_route = walking_route;
-            best_parking_node = parking_node;
+        if (walking_route.first <= max_walking_time) {
+            if (total_time < best_total_time ||
+               (total_time == best_total_time && walking_route.first > best_walking_route.first))
+            {
+                // Update the best route if it's faster or if there's a tie, prefer higher walking time
+                best_total_time = total_time;
+                best_driving_route = driving_route;
+                best_walking_route = walking_route;
+                best_parking_node = parking_node;
+            }
         }
-        else if (walking_route.first > max_walking_time)
+        else
         {
             alternative_routes.emplace_back(total_time, driving_route, walking_route);
             walking_time_exceeds_limit = true;

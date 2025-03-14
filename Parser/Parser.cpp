@@ -7,6 +7,8 @@
 Parser::Parser(const std::string &choice) {
     if (choice == "1") {
         this->prefix = "Small_";
+    } else if (choice == "3") {
+        this->prefix = "Appendix_";
     }
 }
 

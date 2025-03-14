@@ -6,32 +6,11 @@ AvoidNodes:
 AvoidSegments:
 
 Mode:driving-walking
-Source:3
-Destination:4
-MaxWalkTime:20
-AvoidNodes:2
-AvoidSegments:
-
-Mode:driving-walking
 Source:5
 Destination:6
 MaxWalkTime:30
 AvoidNodes:
 AvoidSegments:(3,4)
-
-Mode:driving-walking
-Source:5
-Destination:6
-MaxWalkTime:10
-AvoidNodes:
-AvoidSegments:(3,4)
-
-Mode:driving-walking
-Source:7
-Destination:8
-MaxWalkTime:20
-AvoidNodes:
-AvoidSegments:
 
 Mode:driving-walking
 Source:2
