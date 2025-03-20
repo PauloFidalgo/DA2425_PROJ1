@@ -215,6 +215,27 @@ WalkingRoute2:<id>,<id>,...(<walk_time_2>)
 TotalTime2:<total_time_2>
 ```
 
+Note: In some cases, there is only 1 alternative path. If that is the case, the output will only contain the following information:
+
+```sh
+Source:<id>
+Destination:<id>
+DrivingRoute:none
+ParkingNode:none
+WalkingRoute:none
+TotalTime:
+Message:Walking time exceeds maximum limit
+Alternative routes:
+Source:<id>
+Destination:<id>
+DrivingRoute1:<id>,<id>,...(<drive_time_1>)
+ParkingNode1:<id>
+WalkingRoute1:<id>,<id>,...(<walk_time_1>)
+TotalTime1:<total_time_1>
+```
+
+To allow verification of the existing alternatives, a min-heap is populated with all paths that exceed the MaxWalkTime. In the end, if no solution complies with the MaxWalkTime, the two best solutions with the minimum total time must be retrieved from the min-heap.
+
 This testbench verifies that:
 1. The function correctly combines driving and walking routes to find the optimal path.
 2. The function respects the maximum walking time constraint.
